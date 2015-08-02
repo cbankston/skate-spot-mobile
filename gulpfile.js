@@ -10,7 +10,10 @@ var sh = require('shelljs');
 
 var paths = {
   sass: ['./scss/**/*.scss'],
-  jade: ['./jade/**/*.jade']
+  jade: [
+    './jade/**/*.jade',
+    './www/js/**/*.jade'
+  ]
 };
 
 gulp.task('default', ['sass', 'jade']);
