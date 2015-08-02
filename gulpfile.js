@@ -15,6 +15,14 @@ var paths = {
 
 gulp.task('default', ['sass', 'jade']);
 
+gulp.task('cordova-plugin-install', function() {
+  require('./plugins.json').forEach(function(plugin) {
+    sh.exec('cordova plugin add ' + plugin, {async: false}, function(code, output) {
+      console.log(output);
+    });
+  });
+});
+
 gulp.task('jade', function(done) {
   gulp.src(paths.jade)
     .pipe(jade())
@@ -41,7 +49,7 @@ gulp.task('watch', function() {
   gulp.watch(paths.jade, ['jade']);
 });
 
-gulp.task('install', ['git-check'], function() {
+gulp.task('install', ['git-check', 'cordova-plugin-install'], function() {
   return bower.commands.install()
     .on('log', function(data) {
       gutil.log('bower', gutil.colors.cyan(data.id), data.message);
