@@ -1,6 +1,10 @@
-angular.module('search')
+angular
+	.module('search')
+	.controller('SearchCtrl', SearchCtrl);
 
-.controller('SearchCtrl', function($scope) {
+SearchCtrl.$inject = ['$scope','$ionicSlideBoxDelegate', 'SpotsRepo'];
+
+function SearchCtrl($scope, $ionicSlideBoxDelegate, SpotsRepo){
 	var vm = this;
 	this.initialized = false;
 
@@ -10,6 +14,11 @@ angular.module('search')
 	$scope.center = null;
 
 	refresh_location();
+
+	SpotsRepo.all().then(function(data) {
+	  $ionicSlideBoxDelegate.update();
+	  $scope.spots = data.spots;
+	});
 
 	$scope.$on('mapInitialized', function(event, map) {
 		vm.initialized = true;
@@ -44,4 +53,4 @@ angular.module('search')
 			$scope.$broadcast('scroll.refreshComplete');
 		}
 	}
-});
+};
