@@ -1,0 +1,1 @@
+angular.module('search', []).service('SpotRepo', SpotRepo);SpotRepo.$inject = ['$q', '$http'];function SpotRepo($q, $http){	return {		all: all	};	function all(){		var defer = $q.defer();		$http.get('http://localhost:3000/api/spots')			.success(function(data) {				defer.resolve(data);			});		return defer.promise;	}}
