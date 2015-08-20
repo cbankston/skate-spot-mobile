@@ -3,7 +3,22 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://maps.google.com/ https://maps.googleapis.com/ https://maps.gstatic.com/ https://mts0.googleapis.com/ https://mts1.googleapis.com/ 'unsafe-inline' 'unsafe-eval'">
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval'
+                           localhost:*
+                           http://*.gstatic.com
+                           http://*.googleapis.com
+                           https://*.gstatic.com
+                           https://*.googleapis.com
+                           https://*.google.com
+                           ;
+               style-src  'self' 'unsafe-inline'
+                           localhost
+                           http://*.gstatic.com
+                           http://*.googleapis.com
+                           https://*.gstatic.com
+                           https://*.googleapis.com
+">
     <title></title>
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
@@ -31,6 +46,7 @@
     <script src="js/camera-test/camera_test_ctrl.js"></script>
 
     <script src="js/search/_.module.js"></script>
+    <script src="js/search/spots_repo.js"></script>
     <script src="js/search/search_ctrl.js"></script>
   </head>
   <body ng-app="starter">
