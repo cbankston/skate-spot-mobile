@@ -11,6 +11,14 @@ angular.module('search')
 
 	refresh_location();
 
+	$scope.spots = [{name: 'spot i'}, {name: 'spot 2'},{name: 'spot 3'}];
+
+	SpotRepo.all().then(function(data) {
+	  $ionicSlideBoxDelegate.update();
+	  $scope.spots = data;
+
+	});
+
 	$scope.$on('mapInitialized', function(event, map) {
 		vm.initialized = true;
 
