@@ -9,12 +9,14 @@ angular.module('starter', [
   // 3rd party
   'ionic',
   'ngMap',
+  'Devise',
 
   // custom
   'starter.controllers',
   'starter.services',
   'camera-test',
-  'search'
+  'search',
+  'auth'
 ])
 
 .run(function($ionicPlatform) {
