@@ -2,9 +2,9 @@ angular
 	.module('search')
 	.controller('SearchCtrl', SearchCtrl);
 
-SearchCtrl.$inject = ['$scope','$ionicSlideBoxDelegate', 'SpotsRepo'];
+SearchCtrl.$inject = ['$scope','$ionicSlideBoxDelegate', 'SpotsRepo', 'Auth'];
 
-function SearchCtrl($scope, $ionicSlideBoxDelegate, SpotsRepo){
+function SearchCtrl($scope, $ionicSlideBoxDelegate, SpotsRepo, Auth){
 	var vm = this;
 	this.initialized = false;
 
@@ -14,6 +14,10 @@ function SearchCtrl($scope, $ionicSlideBoxDelegate, SpotsRepo){
 	$scope.center = null;
 
 	refresh_location();
+
+	Auth.currentUser().then(function(data) {
+		$scope.currentUser = data;
+	});
 
 	SpotsRepo.all().then(function(data) {
 	  $ionicSlideBoxDelegate.update();
