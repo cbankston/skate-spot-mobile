@@ -2,9 +2,9 @@ angular
 	.module('search')
 	.controller('SearchCtrl', SearchCtrl);
 
-SearchCtrl.$inject = ['$scope','$ionicSlideBoxDelegate', 'SpotsRepo', 'Auth'];
+SearchCtrl.$inject = ['$scope','$ionicSlideBoxDelegate', '$ionicModal', 'SpotsRepo'];
 
-function SearchCtrl($scope, $ionicSlideBoxDelegate, SpotsRepo, Auth){
+function SearchCtrl($scope, $ionicSlideBoxDelegate, $ionicModal, SpotsRepo){
 	var vm = this;
 	this.initialized = false;
 
@@ -14,10 +14,6 @@ function SearchCtrl($scope, $ionicSlideBoxDelegate, SpotsRepo, Auth){
 	$scope.center = null;
 
 	refresh_location();
-
-	Auth.currentUser().then(function(data) {
-		$scope.currentUser = data;
-	});
 
 	SpotsRepo.all().then(function(data) {
 	  $ionicSlideBoxDelegate.update();
@@ -57,4 +53,26 @@ function SearchCtrl($scope, $ionicSlideBoxDelegate, SpotsRepo, Auth){
 			$scope.$broadcast('scroll.refreshComplete');
 		}
 	}
-};
+
+	$ionicModal.fromTemplateUrl('/templates/search/create-spot.html', {
+		scope: $scope,
+		animation: 'slide-in-up'
+	}).then(function(modal) {
+		$scope.modal = modal;
+	});
+
+	$scope.openModal = function() {
+		$scope.modal.show();
+	};
+
+	$scope.create_spot = function(data) {
+		data.lat = $scope.position.coords.latitude;
+		data.long = $scope.position.coords.longitude;
+		SpotsRepo.create(data).then(function(data) {
+			$scope.spots.push(data.spot);
+			$scope.modal.hide();
+		}, function() {
+
+		});
+	};
+}
