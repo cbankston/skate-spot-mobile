@@ -26,7 +26,7 @@ angular.module('starter', [
           $rootScope.currentUser = data;
           console.log($rootScope.currentUser);
         }, function() {
-          $state.go('login');
+          //$state.go('login');
         });
       });
 
