@@ -1,5 +1,5 @@
 angular
-	.module('search')
+	.module('spot')
 	.controller('SearchCtrl', SearchCtrl);
 
 SearchCtrl.$inject = ['$scope','$ionicSlideBoxDelegate', '$ionicModal', 'SpotsRepo'];
@@ -26,7 +26,10 @@ function SearchCtrl($scope, $ionicSlideBoxDelegate, $ionicModal, SpotsRepo){
 		$scope.map = map;
 
 		refresh_location();
+
 	});
+
+
 
 	function refresh_location() {
 		console.log('performing refresh');
@@ -53,26 +56,4 @@ function SearchCtrl($scope, $ionicSlideBoxDelegate, $ionicModal, SpotsRepo){
 			$scope.$broadcast('scroll.refreshComplete');
 		}
 	}
-
-	$ionicModal.fromTemplateUrl('/templates/search/create-spot.html', {
-		scope: $scope,
-		animation: 'slide-in-up'
-	}).then(function(modal) {
-		$scope.modal = modal;
-	});
-
-	$scope.openModal = function() {
-		$scope.modal.show();
-	};
-
-	$scope.create_spot = function(data) {
-		data.lat = $scope.position.coords.latitude;
-		data.long = $scope.position.coords.longitude;
-		SpotsRepo.create(data).then(function(data) {
-			$scope.spots.push(data.spot);
-			$scope.modal.hide();
-		}, function() {
-
-		});
-	};
 }
