@@ -17,9 +17,13 @@ $dark:                            #444 !default;
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
+$bar-dark-bg: #333333;
+$tabs-dark-bg: #000000;
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
 .modal-backdrop { background: white; }
+.scroll { height: 100%; }
+map { height: 100% !important; }
 
