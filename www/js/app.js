@@ -15,7 +15,7 @@ angular.module('starter', [
   'starter.controllers',
   'starter.services',
   'camera-test',
-  'search',
+  'spot',
   'auth'
 ])
 
