@@ -1,0 +1,13 @@
+ion-view(view-title="Camera Test")
+  ion-content.padding
+    ion-list
+      ion-item.item-icon-right(type="item-text-wrap", ng-click="take_video()")
+        h2 Take Video
+        i.icon.ion-chevron-right.icon-accessory
+
+      ion-item.item-icon-right(type="item-text-wrap", ng-click="select_photo()")
+        h2 Existing Photo
+        i.icon.ion-chevron-right.icon-accessory
+
+      ion-item.item-icon-right(type="item-text-wrap")
+        img#myImage
